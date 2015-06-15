@@ -6,6 +6,7 @@ import com.twen.decorator.Sourceable;
 import com.twen.factory.*;
 import com.twen.prototype.Prototype;
 import com.twen.prototype.SerializableObject;
+import com.twen.proxy.Proxy;
 
 public class Main {
 
@@ -78,9 +79,13 @@ public class Main {
 
         //--------------7.Decorator
         //装饰器模式
-        Sourceable source = new Source();
+        /*Sourceable source = new Source();
         Sourceable obj = new Decorator(source);
-        obj.method();
+        obj.method();*/
 
+        //-------------8.Proxy
+        //代理模式
+        com.twen.proxy.Sourceable source = new Proxy();
+        source.method();
     }
 }
