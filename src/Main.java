@@ -1,12 +1,22 @@
 import com.twen.adapter.*;
+import com.twen.bridge.*;
+import com.twen.bridge.SourceSub1;
+import com.twen.bridge.SourceSub2;
 import com.twen.builder.Builder;
+import com.twen.composite.Tree;
+import com.twen.composite.TreeNode;
 import com.twen.decorator.*;
 import com.twen.decorator.Source;
 import com.twen.decorator.Sourceable;
+import com.twen.facade.Computer;
 import com.twen.factory.*;
 import com.twen.prototype.Prototype;
 import com.twen.prototype.SerializableObject;
 import com.twen.proxy.Proxy;
+import com.twen.strategy.ICalculator;
+import com.twen.strategy.Plus;
+
+import java.util.Enumeration;
 
 public class Main {
 
@@ -85,7 +95,60 @@ public class Main {
 
         //-------------8.Proxy
         //代理模式
-        com.twen.proxy.Sourceable source = new Proxy();
-        source.method();
+        /*com.twen.proxy.Sourceable source = new Proxy();
+        source.method();*/
+
+        //--------------9.Facade
+        //外观模式
+        /*Computer computer = new Computer();
+        computer.startup();
+        computer.shutdown();*/
+
+        //--------------10.Bridge
+        //桥接模式
+        /*Bridge bridge = new MyBridge();
+        //调用第一个对象
+        com.twen.bridge.Sourceable source1 = new SourceSub1();
+        bridge.setSource(source1);
+        bridge.method();
+        //调用第二个对象
+        com.twen.bridge.Sourceable source2 = new SourceSub2();
+        bridge.setSource(source2);
+        bridge.method();*/
+
+        //------------11.Composite
+        //组合模式
+/*        Tree tree = new Tree("A");
+        TreeNode nodeB = new TreeNode("B");
+        TreeNode nodeC = new TreeNode("C");
+
+        nodeB.add(nodeC);
+        tree.root.add(nodeB);
+
+        System.out.println("build the tree finished...");
+
+        System.out.println("root Name:"+tree.root.getName());
+
+//        Enumeration<TreeNode> enumTreeNode = tree.root.getChildren();
+//        if (enumTreeNode.hasMoreElements()){
+//            TreeNode nextTreeNode = enumTreeNode.nextElement();
+//            System.out.println("nextTreeNode Name:"+nextTreeNode.getName());
+//            Enumeration<TreeNode> nextEnumTreeNode = nextTreeNode.getChildren();
+//            if (nextEnumTreeNode.hasMoreElements()){
+//                TreeNode nnextTreeNode = nextEnumTreeNode.nextElement();
+//                System.out.println("nnextTreeNode Name:"+nnextTreeNode.getName());
+//            }
+//        }
+
+        tree.printTreeNodeName(tree.root);*/
+
+        //----------------13.Strategy
+        //策略模式
+        String exp = "2+5";
+        ICalculator cal = new Plus();
+        int result = cal.calculate(exp);
+        System.out.println(result);
+
     }
+
 }
