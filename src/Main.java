@@ -1,8 +1,13 @@
+import com.twen.Command.Command;
+import com.twen.Command.Invoker;
+import com.twen.Command.Receiver;
+import com.twen.Command.impl.MyCommand;
 import com.twen.adapter.*;
 import com.twen.bridge.*;
 import com.twen.bridge.SourceSub1;
 import com.twen.bridge.SourceSub2;
 import com.twen.builder.Builder;
+import com.twen.chainofresponsibility.impl.MyHandler;
 import com.twen.composite.Tree;
 import com.twen.composite.TreeNode;
 import com.twen.decorator.*;
@@ -10,11 +15,21 @@ import com.twen.decorator.Source;
 import com.twen.decorator.Sourceable;
 import com.twen.facade.Computer;
 import com.twen.factory.*;
+import com.twen.iterator.Collection;
+import com.twen.iterator.Iterator;
+import com.twen.iterator.impl.MyCollection;
+import com.twen.memento.Original;
+import com.twen.memento.Storage;
+import com.twen.observer.Subject;
+import com.twen.observer.impl.MySubject;
+import com.twen.observer.impl.Observer1;
+import com.twen.observer.impl.Observer2;
 import com.twen.prototype.Prototype;
 import com.twen.prototype.SerializableObject;
 import com.twen.proxy.Proxy;
 import com.twen.strategy.ICalculator;
 import com.twen.strategy.Plus;
+import com.twen.template.AbstractCalculator;
 
 import java.util.Enumeration;
 
@@ -144,10 +159,64 @@ public class Main {
 
         //----------------13.Strategy
         //策略模式
-        String exp = "2+5";
+        /*String exp = "2+5";
         ICalculator cal = new Plus();
         int result = cal.calculate(exp);
-        System.out.println(result);
+        System.out.println(result);*/
+
+        //----------------14.Template Method
+        //模板方法
+        /*String exp = "8+8";
+        AbstractCalculator cal = new com.twen.template.Plus();
+        int result = cal.calculator(exp, "\\+");
+        System.out.println(result);*/
+
+        //-------------15.Observer
+        //观察者模式
+        /*Subject sub =new MySubject();
+        sub.add(new Observer1());
+        sub.add(new Observer2());
+        sub.operation();*/
+
+        //-------------16.Iterator
+        //迭代子模式
+        /*Collection collection = new MyCollection();
+        Iterator it = collection.iterator();
+        while (it.hasNext()){
+            System.out.println(it.next());
+        }*/
+
+        //-------------17.Chain of Responsibility
+        //责任链模式
+        /*MyHandler h1 = new MyHandler("h1");
+        MyHandler h2 = new MyHandler("h2");
+        MyHandler h3 = new MyHandler("h3");
+        h1.setHandler(h2);
+        h2.setHandler(h3);
+        h1.operator();*/
+
+        //-------------18.Command
+        //命令模式
+        /*Receiver receiver = new Receiver();
+        Command command = new MyCommand(receiver);
+        Invoker invoker = new Invoker(command);
+        invoker.action();*/
+
+        //--------------19.Memento
+        //备忘录模式
+
+        // 创建原始类
+        Original origi = new Original("egg");
+        // 创建备忘录
+        Storage storage = new Storage(origi.createMemento());
+        // 修改原始类的状态
+        System.out.println("初始化状态为：" + origi.getValue());
+        origi.setValue("niu");
+        System.out.println("修改后的状态为：" + origi.getValue());
+        // 回复原始类的状态
+        origi.restoreMemento(storage.getMemento());
+        System.out.println("恢复后的状态为：" + origi.getValue());
+
 
     }
 
