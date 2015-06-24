@@ -15,9 +15,12 @@ import com.twen.decorator.Source;
 import com.twen.decorator.Sourceable;
 import com.twen.facade.Computer;
 import com.twen.factory.*;
+import com.twen.interpreter.impl.Minus;
 import com.twen.iterator.Collection;
 import com.twen.iterator.Iterator;
 import com.twen.iterator.impl.MyCollection;
+import com.twen.mediator.Mediator;
+import com.twen.mediator.impl.MyMediator;
 import com.twen.memento.Original;
 import com.twen.memento.Storage;
 import com.twen.observer.Subject;
@@ -27,9 +30,13 @@ import com.twen.observer.impl.Observer2;
 import com.twen.prototype.Prototype;
 import com.twen.prototype.SerializableObject;
 import com.twen.proxy.Proxy;
+import com.twen.state.Context;
+import com.twen.state.State;
 import com.twen.strategy.ICalculator;
 import com.twen.strategy.Plus;
 import com.twen.template.AbstractCalculator;
+import com.twen.visitor.Visitor;
+import com.twen.visitor.impl.MyVisitor;
 
 import java.util.Enumeration;
 
@@ -206,7 +213,7 @@ public class Main {
         //备忘录模式
 
         // 创建原始类
-        Original origi = new Original("egg");
+        /*Original origi = new Original("egg");
         // 创建备忘录
         Storage storage = new Storage(origi.createMemento());
         // 修改原始类的状态
@@ -215,8 +222,37 @@ public class Main {
         System.out.println("修改后的状态为：" + origi.getValue());
         // 回复原始类的状态
         origi.restoreMemento(storage.getMemento());
-        System.out.println("恢复后的状态为：" + origi.getValue());
+        System.out.println("恢复后的状态为：" + origi.getValue());*/
 
+        //--------------20.State
+        //状态模式
+        /*State state = new State();
+        Context context = new Context(state);
+
+        //设置第一种状态
+        state.setValue("state1");
+        context.method();
+
+        //设置第二种状态
+        state.setValue("state2");
+        context.method();*/
+
+        //---------------21.Visitor
+        //访问者模式
+        /*Visitor visitor = new MyVisitor();
+        com.twen.visitor.Subject sub = new com.twen.visitor.impl.MySubject();
+        sub.accept(visitor);*/
+
+        //---------------22.Mediator
+        //中介者模式
+        /*Mediator mediator = new MyMediator();
+        mediator.createMediator();
+        mediator.workAll();*/
+
+        //---------------23.Interpreter
+        //解释器模式
+        int result = new Minus().interpret(new com.twen.interpreter.Context(new com.twen.interpreter.impl.Plus().interpret(new com.twen.interpreter.Context(9,2)),8));
+        System.out.println(result);
 
     }
 
